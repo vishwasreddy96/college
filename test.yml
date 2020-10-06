@@ -1,0 +1,36 @@
+---
+- hosts: nodee
+  become: yes
+  tasks:
+          - name: Random
+            apt:
+                      update_cache: yes
+
+          - name: Installing JAVA
+            apt:
+                      name: openjdk-8-jre-headless
+                      state: latest
+                      install_recommends: no
+          - name: Installing Apache
+            apt:
+                      name: apache2
+                      state: present
+          - name: Installing apache tomcat
+            get_url:
+                    url: https://apache.mirror.colo-serv.net/tomcat/tomcat-8/v8.5.57/bin/apache-tomcat-8.5.57.tar.gz
+                    dest: /home/ubuntu
+          - name: Extract foo.tgz into /var/lib/foo
+            unarchive:
+                    src: /home/ubuntu/apache-tomcat-8.5.57.tar.gz
+                    dest: /home/ubuntu
+                    remote_src: yes
+
+         # - name: installing LoginApp
+         #   get_url:
+         #           url: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+         #           dest: /home/ubuntu
+          - name: Copy the war file to\ apacje tomcat
+            copy: src=/var/lib/jenkins/workspace/demo/target/vardhaman.war dest=/home/ubuntu/apache-tomcat-8.5.57/webapps/
+              
+          - name: Start the tomcat
+            command: nohup "/home/ubuntu/apache-tomcat-8.5.57/bin/startup.sh"
