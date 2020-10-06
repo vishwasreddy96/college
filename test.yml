@@ -30,7 +30,7 @@
          #           url: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
          #           dest: /home/ubuntu
           - name: Copy the war file to\ apacje tomcat
-            copy: src=/var/lib/jenkins/workspace/demo/target/vardhaman.war dest=/home/ubuntu/apache-tomcat-8.5.57/webapps/
+            copy: src=/var/lib/jenkins/workspace/pipeline/target/college.war dest=/home/ubuntu/apache-tomcat-8.5.57/webapps/
               
           - name: Start the tomcat
             command: nohup "/home/ubuntu/apache-tomcat-8.5.57/bin/startup.sh"
